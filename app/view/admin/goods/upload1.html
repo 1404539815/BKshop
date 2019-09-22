@@ -1,0 +1,37 @@
+<link rel='stylesheet' href="/public/admin/css/base.css">
+<link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+<link rel='stylesheet' type="text/css" href="/public/admin/other/webuploader/css/diyUpload.css">
+<link rel='stylesheet' type="text/css" href="/public/admin/other/webuploader/css/webuploader.css">
+<script type="text/javascript" src="/public/admin/js/jquery.js"></script>
+<script type="text/javascript" src="/public/admin/other/webuploader/js/diyUpload.js"></script>
+<script type="text/javascript" src="/public/admin/other/webuploader/js/webuploader.html5only.min.js"></script>
+
+<div class="panel panel-default">              
+    <div class="panel-heading">
+        批量上传
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive input-form">
+           
+        </div>
+        
+    </div>
+</div>
+<script>
+    $(function(){
+        var photoStr="";
+        $("#photoLib").diyUpload({
+            url:'/admin/gallery/doUpload?_csrf={{csrf}}',
+            success:function(response){
+                photoStr = '<input type="hidden" name="goods_imge_list[]" value='+response.link+' />';
+                $("photoList").append(photoStr);
+                console.log(gallerys);
+                
+            },
+            error:function(err){
+                console.log(err);
+            }
+        })
+
+    })
+</script>

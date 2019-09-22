@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href="/public/admin/css/base.css">
+    <link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="panel panel-default">
+            <div class="panel-heading clear">
+                <span>商品广告列表</span> 
+                <a href="/admin/advertise/add" class=" pull-right">增加商品广告</a>
+            </div>
+            <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>广告名称</th>
+                            <th>分类</th>
+                            <th>图片</th>                                
+                            <th>跳转地址</th>
+                            <th>位置</th>                                
+                            <th>排序</th>
+                            <th>状态</th>                                
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for advertise in advertises%}
+                            <tr>
+                                <td>{{advertise.ads_title}}</td>
+                                <td>
+                                    {%if advertise.ads_type==1%}网站
+                                    {%elseif advertise.ads_type==2%}app
+                                    {%else%}小程序
+                                    {%endif%}
+                                </td>
+                                <td><img src="{{helper.url200(advertise.ads_img)}}" style="width:25px;height:25px;"></td>  
+                                <td>{{advertise.ads_link}}</td>
+                                <td >
+                                    {%if advertise.ads_position==1%}上
+                                    {%elseif advertise.ads_position==2%}中
+                                    {%elseif advertise.ads_position==3%}左
+                                    {%elseif advertise.ads_position==4%}右
+                                    {%else%}下
+                                    {%endif%}
+                                </td>
+                                <td >{{advertise.data_sort}}</td>
+                                <td >
+                                    {%if advertise.data_status==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green"  ></span>
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" ></span>                                    
+                                    {%endif%}
+                                </td>                                                                    
+                                <td class="text-center text">　
+                                    <a href="/admin/advertise/edit?_id={{advertise._id}}" >修改</a>　
+                                    <a href="/admin/advertise/delete?_id={{advertise._id}}">删除</a>
+                                </td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

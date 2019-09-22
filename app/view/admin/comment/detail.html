@@ -1,0 +1,51 @@
+<link rel='stylesheet' href="/public/admin/css/base.css">
+<link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+<script type="text/javascript" src="/public/admin/js/jquery.js"></script>
+<div class="panel panel-default">              
+    <div class="panel-heading">
+        评论详情
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive input-form">  
+                <ul >
+                        <li> 
+                            <span>商品名称:</span>
+                            <span>xxx商品</span>
+                        </li>  
+                        <li>
+                            <span>评论信息:</span>
+                            <span>{{comment.comment_content}}</span>
+                        </li>  
+                        <li>
+                            <span>评论用户:</span>
+                            <span>{{comment.user_name}}</span>
+                        </li>
+                        <li>
+                            <span>评论ip:</span>
+                            <span>{{comment.user_ip}}</span>
+                        </li>
+                        <li>
+                            <span>评论时间:</span>
+                            <span>{{helper.dateFormat(comment.comment_time)}}</span>
+                        </li>
+                        <li>
+                            <br/>
+                            <button id="comment_review" type="submit" class="btn btn-default">
+                            {%if comment.comment_status==0%}
+                            通过审核
+                            {%else%}
+                            关闭评论
+                            {%endif%}
+                            </button>
+                        </li>
+                </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){        
+        $("#comment_review").on('click',function() {
+            location.href = '/admin/comment/doDetail?_id={{comment._id}}&page={{page}}&status={{comment.comment_status}}';
+        })
+    })
+</script>

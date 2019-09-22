@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href="/public/admin/css/base.css">
+    <link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="panel panel-default">
+            <div class="panel-heading clear">
+                <span>文章列表</span> 
+                <a href="/admin/article/add" class=" pull-right">增加文章</a>
+            </div>
+            <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>文章名称</th>
+                            <th>文章图片</th>
+                            <th>所属分类</th>                                
+                            <th>增加日期</th>
+                            <th>排序</th>
+                            <th>状态</th>                                
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for article in articles%}
+                            <tr>
+                                <td>{{article.article_title}}</td>
+                                <td><img src="{{helper.url200(article.article_img)}}" style="width:25px;height:25px;"></td>  
+                                <td>
+                                    {{article.category.acate_title}}
+                                </td>
+                                <td >{{helper.dateFormat(article.create_time)}}
+                                <td >{{article.data_sort}}</td>
+                                <td >
+                                    {%if article.article_status==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green"  ></span>
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" ></span>                                    
+                                    {%endif%}
+                                </td>                                                                    
+                                <td class="text-center text">　
+                                    <a href="/admin/article/edit?_id={{article._id}}" >修改</a>　
+                                    <a href="/admin/article/delete?_id={{article._id}}">删除</a>
+                                </td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

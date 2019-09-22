@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href="/public/index/css/base.css">
+    <link rel='stylesheet' href="/public/index/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <script src="/public/index/js/jquery-1.10.1.js"></script>	
+    <script type="text/javascript" src="/public/index/js/bootstrap.js"></script>
+    <script src="/public/index/js/swiper.min.js"> </script>
+ 
+</head>
+<body>
+    <!-- 头部 -->
+    {%include "./common/base.html"%}
+   
+</body>
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+    // direction: 'vertical', // 垂直切换选项
+    loop: true, // 循环模式选项
+    
+    // 如果需要分页器
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    // 如果需要滚动条
+    // scrollbar: {
+    //   el: '.swiper-scrollbar',
+    // },
+  }) 
+</script>
+</html>

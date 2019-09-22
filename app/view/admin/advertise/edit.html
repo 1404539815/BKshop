@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href="/public/admin/css/base.css">
+    <link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+    <link rel='stylesheet' type="text/css" href="/public/admin/other/webuploader/css/diyUpload.css">
+    <link rel='stylesheet' type="text/css" href="/public/admin/other/webuploader/css/webuploader.css">
+    <script type="text/javascript" src="/public/admin/js/jquery.js"></script>
+    <script type="text/javascript" src="/public/admin/js/bootstrap.js"></script>
+    <!-- <script type="text/javascript" src="/public/admin/js/base.js"></script> -->
+    <link href="/public/admin/other/wysiwyg-editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/public/admin/other/wysiwyg-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="/public/admin/other/wysiwyg-editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/public/admin/other/wysiwyg-editor/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="/public/admin/other/wysiwyg-editor/js/zh_cn.js"></script>
+    <script type="text/javascript" src="/public/admin/other/webuploader/js/diyUpload.js"></script>
+    <script type="text/javascript" src="/public/admin/other/webuploader/js/webuploader.html5only.min.js"></script>
+</head>
+<body>
+    <div class="panel panel-default">              
+        <div class="panel-heading">
+            修改广告
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive input-form">
+                <form action="/admin/advertise/doEdit?_csrf={{csrf}}" method="post" enctype="multipart/form-data" >
+                    <input type="hidden" name="_id" value="{{advertise._id}}">
+                    <ul >
+                        <li>分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类 :
+                            <select name="ads_type" id="">
+                                <option value="1" name="网站"
+                                {%if advertise.ads_type==1%}                                
+                                selected
+                                {%endif%}
+                                >网站</option>
+                                <option value="2" name="app"
+                                {%if advertise.ads_type==2%}                                
+                                selected
+                                {%endif%}
+                                >app</option>
+                                <option value="3" name="小程序"
+                                {%if advertise.ads_type==3%}                                
+                                selected
+                                {%endif%}
+                                >小程序</option>
+                            </select>
+                        </li>
+                        <li> <span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称 :</span> <input type="text" name="ads_title" value="{{advertise.ads_title}}"/></li>  
+                        <li> <span>跳转网址:</span> <input type="text" name="ads_link" value="{{advertise.ads_link}}"/></li> 
+                        <li> 
+                            <span>广 告 图 &nbsp;:</span> <input type="file" name="ads_img"/>
+                            <img src="{{advertise.ads_img}}" style="width:25px;height:25px;">
+                        </li>
+                        <li> 位置:
+                            <select name="ads_position" id="">
+                                <option value="1" name="上" {%if advertise.ads_position==1%} selected {%endif%}>上</option>
+                                <option value="2" name="中" {%if advertise.ads_position==2%} selected {%endif%}>中</option>
+                                <option value="3" name="左" {%if advertise.ads_position==3%} selected {%endif%}>左</option>
+                                <option value="4" name="右" {%if advertise.ads_position==4%} selected {%endif%}>右</option>
+                                <option value="5" name="下" {%if advertise.ads_position==5%} selected {%endif%}>下</option>
+                            </select>
+                        </li>
+                        <li>  <span>排　　序:</span> <input type="text" name="data_sort" value="{{advertise.data_sort}}"/></li>       
+                        <li>  <span>状　　态:</span> 
+                            <input type="radio" name="data_status" value="1" id="a" {%if advertise.data_status==1%} checked {%endif%}/> <label for="a">显示</label>   
+                            <input type="radio" name="data_status" value="0" id="b" {%if advertise.data_status==0%} checked {%endif%}/> <label for="b">隐藏</label> 　
+                        </li>
+                        <li>
+                            <br/>
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            //上传图片
+            $(function(){
+            var photoStr="";
+            $("#photoLib").diyUpload({
+                url:'/admin/goods/doUpload?_csrf={{csrf}}',
+                success:function(response){
+                    photoStr = '<input type="hidden" name="relate_gallerys" value='+response.link+' />';
+                    $("#photoList").append(photoStr);
+                    console.log(gallerys);
+                    
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            })
+            })
+        })
+    </script>
+</body>
+</html>
